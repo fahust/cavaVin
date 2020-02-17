@@ -1,0 +1,54 @@
+
+
+FRONT : 
+    Utilisateur :
+        -Inscription
+        -Ajout d'un vin dans sa cave
+        -Edition d'un vin de sa cave
+        -Ajout d'un vin dans ses favories
+        -Ajout d'une note a un vin
+
+    Recherche d'un vin :
+        -avec ses caractéristiques
+        -avec une image (tesseract.js)
+
+
+BO :
+    Vin : 
+        -nom
+        -date
+        -nombre de notes
+        -douceur/10
+        -acidité/10
+        -fruité/10
+        -corps/10
+        -description
+        -lieux
+        -prix
+        -emplacement(si dans la cave)
+
+FUNCTION FRONT : 
+    route d'appel et paramètre de post : 
+
+    //USER
+    /user/create        post(username,password)
+    /user/connect/      post(username,password)
+    /user/delete/       post(username,password)
+
+    //VIN
+    /vin/add            post(name,owner,price,age,dateAchat)
+    /vin/update/        post(name,owner,newName,newPrice,newAge,newDateAchat,newTags)
+    /vin/delete/        post(name,owner)
+    /vin/tag/add/       post(name,owner,newTags)
+    /vin/tag/delete/    post(name,owner,newTags)
+    /vin/view/          post(name,owner)
+    /vin/list/          post()
+    /vin/search/        post(key,owner)
+
+
+echo "# cavaVin" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git remote add origin https://github.com/fahust/cavaVin.git
+git push -u origin master
