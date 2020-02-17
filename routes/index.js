@@ -2,6 +2,7 @@ module.exports = app => {
 
     require('./vin')(app);
     require('./user')(app);
+    require('./vinCommunity')(app);
     //require('./media')(app);
 
     // HOME

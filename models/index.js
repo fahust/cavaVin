@@ -10,6 +10,7 @@ db.once('open', function() {
 module.exports = app => {
     app.models = {
         Vin: require("./Vin"),
+        VinCommunity: require("./VinCommunity"),
         User: require("./User"),
         //Media: require("./Media"),
         //Question: require("./Question"),
