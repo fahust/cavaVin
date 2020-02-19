@@ -6,13 +6,13 @@ module.exports = app => {
     //app.get('/users/:firstname', app.controllers.user.getUsersByFirstname);
 
     // ADD VIN
-    app.post('/vinCommunity/add', app.controllers.vinCommunity.addVinCave);
+    app.post('/vinCommunity/add', app.controllers.vinCommunity.addVinCommunity);
 
     // UPDATE VIN
-    app.post('/vinCommunity/update/', app.controllers.vinCommunity.updateVinCave);
+    app.post('/vinCommunity/update/', app.controllers.vinCommunity.updateVinCommunity);
 
     // DELETE VIN
-    app.post('/vinCommunity/delete/', app.controllers.vinCommunity.deleteVinCave);
+    app.post('/vinCommunity/delete/', app.controllers.vinCommunity.deleteVinCommunity);
 
     // ADD VIN TAG
     app.post('/vinCommunity/note/add/', app.controllers.vinCommunity.addNote);
@@ -21,13 +21,13 @@ module.exports = app => {
     app.post('/vinCommunity/note/delete/', app.controllers.vinCommunity.deleteNote);
 
     // VIEW VIN
-    app.post('/vinCommunity/view/', app.controllers.vinCommunity.viewVinCave);
+    app.post('/vinCommunity/view/', app.controllers.vinCommunity.viewVinCommunity);
 
     // LIST VIN
-    app.get('/vinCommunity/list/', app.controllers.vinCommunity.listVinsCave);
+    app.get('/vinCommunity/list/', app.controllers.vinCommunity.listVinsCommunity);
 
     // SEARCH VIN
-    app.post('/vinCommunity/search/', app.controllers.vinCommunity.searchVinCave);
+    app.post('/vinCommunity/search/', app.controllers.vinCommunity.searchVinCommunity);
 
     // test VIN
     //app.get('/test/', app.controllers.vin.test);

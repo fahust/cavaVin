@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost:27017/vinApp', {useNewUrlParser: true});
-mongoose.connect('mongodb+srv://fahust:skisoboy@cavavin-dexvv.mongodb.net/test?retryWrites=true&w=majority');
+mongoose.connect('mongodb://localhost:27017/vinApp', {useNewUrlParser: true});
+// mongoose.connect('mongodb+srv://fahust:skisoboy@cavavin-dexvv.mongodb.net/test?retryWrites=true&w=majority');
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
@@ -12,8 +12,6 @@ module.exports = app => {
         Vin: require("./Vin"),
         VinCommunity: require("./VinCommunity"),
         User: require("./User"),
-        //Media: require("./Media"),
-        //Question: require("./Question"),
-        //Choice: require("./Choice")
+        Tags: require("./Tags"),
     };
 };

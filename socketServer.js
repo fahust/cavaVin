@@ -1,3 +1,6 @@
+/* alors ça dario c'est juste pour mon kiff, on l'utilise pas mais c'est un création de serveur en socket
+En gros c'est avec ça qu'ont fais du temps réel en node JS, c'est ultra efficace niveau perf, mais ce serait pas utile pour l'api */
+
 const express = require('express'); 
 const app = express();
 const server = app.listen(3001,console.log('Socket.io Hello Wolrd server started!'));
