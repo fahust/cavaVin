@@ -1,3 +1,6 @@
+var jwt = require('jsonwebtoken');
+
+
 module.exports = app => {
     return {createUser,connectUser, checkDeleteUser,deleteUser};
 
@@ -5,10 +8,10 @@ module.exports = app => {
         app.models.User.findOne({'username': req.body.user.username , 'password': req.body.user.password}, function (err, user) {
             if (err) 
                 res.send(err); 
-            if(!user){console.log(req.body.user)
+            if(!user){console.log(req.body.user);
                 userSaved = new app.models.User(req.body.user);
                 userSaved.save();
-                res.send('User created');
+                res.json(jwt.sign({ user: user.username }, 'shhhhhh'));
             }else{
                 res.send('User '+req.body.user.username+' already exist');
             }
@@ -24,7 +27,8 @@ module.exports = app => {
                 if (err) throw err;
                 console.log(req.body.user.password, isMatch);
                 if(isMatch == true)
-                    res.send(req.body.user.username);
+                    //res.send(req.body.user.username);
+                    res.json(jwt.sign({ user: user.username }, 'shhhhhh'));
             });
         });
     }
