@@ -29,7 +29,5 @@ module.exports = app => {
     // SEARCH VIN
     app.post('/vin/search/', app.controllers.vin.searchVinCave);
 
-    // test VIN
-    app.get('/test/', app.controllers.vin.test);
 
 }
