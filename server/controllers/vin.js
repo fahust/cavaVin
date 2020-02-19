@@ -1,9 +1,12 @@
+var jwt = require('jsonwebtoken');
+
 module.exports = app => {
     return {addVinCave,updateVinCave, viewVinCave, deleteVinCave, searchVinCave, listVinsCave, addTag, deleteTag};
     /*add or edit if exist in array*/
     function addVinCave(req, res){
+        ownerVerified = jwt.verify(req.body.vin.owner, 'shhhhhh');
         if(req.body.vin.owner){
-            app.models.Vin.find({'name': req.body.vin.name , 'owner': req.body.vin.owner}, function (err, vin) {
+            app.models.Vin.find({'name': req.body.vin.name , 'owner': ownerVerified.user}, function (err, vin) {
                 if (err) 
                     res.send(err); 
                 if(Array.isArray(vin) && vin.length<=0){
@@ -18,8 +21,9 @@ module.exports = app => {
     }
     /* edit vin*/
     function updateVinCave(req, res) {
+        ownerVerified = jwt.verify(req.body.vin.owner, 'shhhhhh');
         if(req.body.vin.owner){
-            app.models.Vin.findOneAndUpdate({'name': req.body.vin.name , 'owner': req.body.vin.owner},  {$set:{'name': req.body.vin.newName,'price':req.body.vin.newPrice,'age':req.body.vin.newAge,'dateAchat':req.body.vin.newDateAchat}}, {useFindAndModify: false},  function (err, vin) {
+            app.models.Vin.findOneAndUpdate({'name': req.body.vin.name , 'owner': ownerVerified.user },  {$set:{'name': req.body.vin.newName,'price':req.body.vin.newPrice,'age':req.body.vin.newAge,'dateAchat':req.body.vin.newDateAchat}}, {useFindAndModify: false},  function (err, vin) {
                 if (err) 
                     res.send(err); 
                 if(!vin){
@@ -32,8 +36,9 @@ module.exports = app => {
     }
     /* add tag vin*/
     function addTag(req, res) {
+        ownerVerified = jwt.verify(req.body.vin.owner, 'shhhhhh');
         if(req.body.vin.owner){
-            app.models.Vin.findOne({'name': req.body.vin.name , 'owner': req.body.vin.owner}, function (err, vin) {
+            app.models.Vin.findOne({'name': req.body.vin.name , 'owner': ownerVerified.user}, function (err, vin) {
                 if (err) 
                     res.send(err); 
 
@@ -49,8 +54,9 @@ module.exports = app => {
     }
     /* delete tag vin*/
     function deleteTag(req, res) {
+        ownerVerified = jwt.verify(req.body.vin.owner, 'shhhhhh');
         if(req.body.vin.owner){
-            app.models.Vin.find({'name': req.body.vin.name , 'owner': req.body.vin.owner}, function (err, vin) {
+            app.models.Vin.find({'name': req.body.vin.name , 'owner': ownerVerified.user}, function (err, vin) {
                 if (err) 
                     res.send(err); 
                 if(vin){
@@ -68,8 +74,9 @@ module.exports = app => {
     }
     /*return one vin in cave*/
     function viewVinCave(req, res){
+        ownerVerified = jwt.verify(req.body.vin.owner, 'shhhhhh');
         if(req.body.vin.owner){
-            app.models.Vin.find({'name': req.body.vin.name , 'owner': req.body.vin.owner}, function (err, vin) {
+            app.models.Vin.find({'name': req.body.vin.name , 'owner': ownerVerified.user}, function (err, vin) {
                 if (err) 
                     res.send(err); 
                 return res.json(vin);
@@ -78,8 +85,9 @@ module.exports = app => {
     }
     /*delete vin in cave*/
     function deleteVinCave(req, res){
+        ownerVerified = jwt.verify(req.body.vin.owner, 'shhhhhh');
         if(req.body.vin.owner){
-            app.models.Vin.findOneAndDelete({'name': req.body.vin.name , 'owner': req.body.vin.owner}, {}, function(err, vin) {
+            app.models.Vin.findOneAndDelete({'name': req.body.vin.name , 'owner': ownerVerified.user}, {}, function(err, vin) {
                 if (err) 
                     res.send(err);
                 res.json('Le vin ' + req.body.vin.name + 'a bien été supprimé');
@@ -88,8 +96,9 @@ module.exports = app => {
     }
     /*return list of vin by point*/
     function searchVinCave(req, res){
+        ownerVerified = jwt.verify(req.body.vin.owner, 'shhhhhh');
         if(req.body.vin.owner){
-            app.models.Vin.find({$or:[ {name: new RegExp('('+req.body.vin.key+')+', "i"), 'owner': req.body.vin.owner} , {tags: new RegExp('('+req.body.vin.key+')+', "i"), 'owner': req.owner} ]}, function(err, vins) {
+            app.models.Vin.find({$or:[ {name: new RegExp('('+req.body.vin.key+')+', "i"), 'owner': ownerVerified.user } , {tags: new RegExp('('+req.body.vin.key+')+', "i"), 'owner': ownerVerified.user} ]}, function(err, vins) {
                 if (err) 
                     res.send(err); 
                 return res.json(vins);
@@ -98,8 +107,9 @@ module.exports = app => {
     }
     /* return complete list of vin*/
     function listVinsCave(req,res){
+        ownerVerified = jwt.verify(req.body.vin.owner, 'shhhhhh');
         if(req.body.vin.owner){
-            app.models.Vin.find({'owner': req.body.vin.owner}, function (err, vin) {
+            app.models.Vin.find({'owner': ownerVerified.user}, function (err, vin) {
                 if (err) 
                     res.send(err); 
                 return res.json(vin);

@@ -57,8 +57,13 @@ FUNCTION FRONT :
 
 
 echo "# cavaVin" >> README.md
-git init
-git add README.md
-git commit -m "first commit"
-git remote add origin https://github.com/fahust/cavaVin.git
-git push -u origin master
+cd cavaVin
+//@see https://rogerdudler.github.io/git-guide/index.fr.html
+//git init //créer un nouveau dépot
+//git remote add origin https://github.com/fahust/cavaVin.git
+git checkout -b maNewBranch //créer et switch (-b créer)
+git add . //Ajouter/valider toutes les modifs de fichiers de la branche sur laquelle je bosse
+git commit -m "first commit" //Ajouter un comm' sur la branche actuelle (obligatoire)
+git push -u origin master //Envoyer les modifs sur le github
+git checkout master //Revenir sur la branche principale
+git pull origin master //Retélécharge la version la plus actuelle
