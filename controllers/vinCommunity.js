@@ -1,12 +1,12 @@
 module.exports = app => {
-    return {addVinCommunity,updateVinCommunity, viewVinCommunity, deleteVinCommunity, searchVinCommunity, listVinsCommunity, addNote, deleteNote, test};
+    return {addVinCommunity,updateVinCommunity, viewVinCommunity, deleteVinCommunity, searchVinCommunity, listVinsCommunity, addNote, deleteNote};
     /*add or edit if exist in array*/
     function addVinCommunity(req, res){
-        app.models.Vin.find({'name': req.body.name}, function (err, vin) {
+        app.models.VinCommunity.find({'name': req.body.name}, function (err, vin) {
             if (err) 
                 res.send(err); 
             if(!vin){
-                new app.models.Vin(req.body);
+                new app.models.VinCommunity(req.body);
                 //vin.save();
                 res.send('Vin created');
             }else{
@@ -24,7 +24,7 @@ module.exports = app => {
     }
     /* add tag vin*/
     function addNote(req, res) {
-        app.models.Vin.find({'name': req.body.name}, function (err, vin) {
+        app.models.VinCommunity.find({'name': req.body.name}, function (err, vin) {
             if (err) 
                 res.send(err); 
             if(vin){
@@ -47,7 +47,7 @@ module.exports = app => {
     }
     /* delete tag vin*/
     function deleteNote(req, res) {
-        app.models.Vin.find({'name': req.body.name}, function (err, vin) {
+        app.models.VinCommunity.find({'name': req.body.name}, function (err, vin) {
             if (err) 
                 res.send(err); 
             if(vin){
@@ -65,7 +65,7 @@ module.exports = app => {
     }
     /*return one vin in cave*/
     function viewVinCommunity(req, res){
-        app.models.Vin.find({'name': req.body.name}, function (err, vin) {
+        app.models.VinCommunity.find({'name': req.body.name}, function (err, vin) {
             if (err) 
                 res.send(err); 
             return res.json(vin);
@@ -73,7 +73,7 @@ module.exports = app => {
     }
     /*delete vin in cave*/
     function deleteVinCommunity(req, res){
-        app.models.Vin.findOneAndDelete({'name': req.body.name , 'owner': req.body.owner}, {}, function(err, vin) {
+        app.models.VinCommunity.findOneAndDelete({'name': req.body.name , 'owner': req.body.owner}, {}, function(err, vin) {
             if (err) 
                 res.send(err);
             res.json('Le vin ' + req.body.name + 'a bien été supprimé');
@@ -81,7 +81,7 @@ module.exports = app => {
     }
     /*return list of vin by point*/
     function searchVinCommunity(req, res){
-        app.models.Vin.find({$or:[ {name: new RegExp('^'+req.body.key+'$', "i")} , {tags: new RegExp('^'+req.body.key+'$', "i")} ]}, function(err, vins) {
+        app.models.VinCommunity.find({$or:[ {name: new RegExp('^'+req.body.key+'$', "i")} , {tags: new RegExp('^'+req.body.key+'$', "i")} ]}, function(err, vins) {
             if (err) 
                 res.send(err); 
             return res.json(vins);
@@ -89,18 +89,11 @@ module.exports = app => {
     }
     /* return complete list of vin*/
     function listVinsCommunity(req,res){
-        app.models.Vin.find({}, function (err, vin) {
+        app.models.VinCommunity.find({}, function (err, vin) {
             if (err) 
                 res.send(err); 
             return res.json(vin);
         });
-    }
-    /* return complete list of vin*/
-    function test(req,res){
-        //console.log(req);
-        let vin = new app.models.Vin();
-        vin.save();
-        return res.send('Vin created');
     }
 };
 

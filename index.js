@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json()); 
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Import du dossier routes et models
+// Import du dossier routes, controllers et models
 require('./controllers')(app);
 require('./models')(app);
 require('./routes')(app);

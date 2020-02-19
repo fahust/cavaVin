@@ -31,19 +31,29 @@ FUNCTION FRONT :
     route d'appel et paramètre de post : 
 
     //USER
-    /user/create        post(username,password)
-    /user/connect/      post(username,password)
-    /user/delete/       post(username,password)
+    /user/create                post(username,password)
+    /user/connect/              post(username,password)
+    /user/delete/               post(username,password)
 
-    //VIN
-    /vin/add            post(name,owner,price,age,dateAchat)
-    /vin/update/        post(name,owner,newName,newPrice,newAge,newDateAchat,newTags)
-    /vin/delete/        post(name,owner)
-    /vin/tag/add/       post(name,owner,newTags)
-    /vin/tag/delete/    post(name,owner,newTags)
-    /vin/view/          post(name,owner)
-    /vin/list/          post()
-    /vin/search/        post(key,owner)
+    //VIN CAVE
+    /vin/add                    post(name,owner,price,age,dateAchat)
+    /vin/update/                post(name,owner,newName,newPrice,newAge,newDateAchat,newTags)
+    /vin/delete/                post(name,owner)
+    /vin/tag/add/               post(name,owner,newTags)
+    /vin/tag/delete/            post(name,owner,newTags)
+    /vin/view/                  post(name,owner)
+    /vin/list/                  post()
+    /vin/search/                post(key,owner)
+
+    //VIN COMMUNITY
+    /vinCommunity/add            post(name,owner,price,age,dateAchat)
+    /vinCommunity/update/        post(name,owner,newName,newPrice,newAge,newDateAchat,newTags)
+    /vinCommunity/delete/        post(name,owner)
+    /vinCommunity/note/add/      post(name,owner,newTags)
+    /vinCommunity/note/delete/   post(name,owner,newTags)
+    /vinCommunity/view/          post(name,owner)
+    /vinCommunity/list/          post()
+    /vinCommunity/search/        post(key,owner)
 
 
 echo "# cavaVin" >> README.md
