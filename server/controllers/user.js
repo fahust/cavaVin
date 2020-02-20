@@ -8,7 +8,7 @@ module.exports = app => {
         app.models.User.findOne({'username': req.body.user.username , 'password': req.body.user.password}, function (err, user) {
             if (err) 
                 res.send(err); 
-            if(!user){console.log(req.body.user);
+            if(!user){
                 userSaved = new app.models.User(req.body.user);
                 userSaved.save();
                 res.json(jwt.sign({ user: user.username }, 'shhhhhh'));
@@ -25,7 +25,6 @@ module.exports = app => {
             // test a matching password
             user.comparePassword(req.body.user.password, function(err, isMatch) {
                 if (err) throw err;
-                console.log(req.body.user.password, isMatch);
                 if(isMatch == true)
                     //res.send(req.body.user.username);
                     res.json(jwt.sign({ user: user.username }, 'shhhhhh'));
@@ -40,7 +39,6 @@ module.exports = app => {
             // test a matching password
             user.comparePassword(req.body.user.password, function(err, isMatch) {
                 if (err) throw err;
-                console.log(req.body.user.password, isMatch);
                 if(isMatch == true)
                     deleteUser(req, res, user._id);
             });

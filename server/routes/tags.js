@@ -7,9 +7,9 @@ module.exports = app => {
 
 
     // ADD VIN TAG
-    app.post('/tag/add/', app.controllers.tags.addTag);
+    app.post('/tag/add/', app.controllers.tags.addTagCommun);
 
     // DELETE VIN TAG
-    app.post('/tag/delete/', app.controllers.tags.deleteTag);
+    app.post('/tag/delete/', app.controllers.tags.deleteTagCommun);
 
 }
