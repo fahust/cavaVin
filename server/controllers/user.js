@@ -11,7 +11,7 @@ module.exports = app => {
             if(!user){
                 userSaved = new app.models.User(req.body.user);
                 userSaved.save();
-                res.json(jwt.sign({ user: user.username }, 'shhhhhh'));
+                res.json(jwt.sign({ user: user.username ,iat:Date.now() }, 'shhhhhh'));
             }else{
                 res.send('User '+req.body.user.username+' already exist');
             }
@@ -23,12 +23,14 @@ module.exports = app => {
             if (err) throw err;
         
             // test a matching password
-            user.comparePassword(req.body.user.password, function(err, isMatch) {
-                if (err) throw err;
-                if(isMatch == true)
-                    //res.send(req.body.user.username);
-                    res.json(jwt.sign({ user: user.username }, 'shhhhhh'));
-            });
+            if(user){
+                user.comparePassword(req.body.user.password, function(err, isMatch) {
+                    if (err) throw err;
+                    if(isMatch == true)
+                        //res.send(req.body.user.username);
+                        res.json(jwt.sign({ user: user.username ,iat:Date.now()  }, 'shhhhhh'));
+                });
+            }
         });
     }
 

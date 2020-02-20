@@ -23,7 +23,7 @@ export default class UserCreate extends React.Component {
       axios.post(`http://localhost:3000/user/connect`, { user })
         .then(res => {
           window.ownerConnect = res.data;
-          console.log(window.ownerConnect);
+          console.log(window.ownerConnect);//dario faut trouver un moyen de faire des variable global car dans la window on peut visiblement creer une variable qu'une fois et du coup l'user est obligé d'actualiser la page alors qu'il faudrais juste qu'il puisse ce reconnecter sans changer la page
         });
     };
   
