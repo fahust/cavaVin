@@ -5,7 +5,7 @@ module.exports = app => {
     /*add or edit if exist in array*/
     function addVinCave(req, res){
         ownerVerified = jwt.verify(req.body.vin.owner, 'shhhhhh');
-        console.log(Date.now()-timeExpiration , ownerVerified.iat)
+        console.log(Date.now()-timeExpiration , ownerVerified.iat);
         if(Date.now()-timeExpiration < ownerVerified.iat){
             req.body.vin.owner = ownerVerified.user;
             if(req.body.vin.owner){
@@ -22,7 +22,7 @@ module.exports = app => {
                 });
             }
         }else{
-            res.send('user expired, pleaze reconect')
+            res.send('user expired, pleaze reconect');
         }
     }
     /* edit vin*/
@@ -41,7 +41,7 @@ module.exports = app => {
                 });
             }
         }else{
-            res.send('user expired, pleaze reconect')
+            res.send('user expired, pleaze reconect');
         }
     }
     /* add tag vin*/
@@ -63,7 +63,7 @@ module.exports = app => {
                 });
             }
         }else{
-            res.send('user expired, pleaze reconect')
+            res.send('user expired, pleaze reconect');
         }
     }
     /* delete tag vin*/
@@ -87,7 +87,7 @@ module.exports = app => {
                 });
             }
         }else{
-            res.send('user expired, pleaze reconect')
+            res.send('user expired, pleaze reconect');
         }
     }
     /*return one vin in cave*/
@@ -102,7 +102,7 @@ module.exports = app => {
                 });
             }
         }else{
-            res.send('user expired, pleaze reconect')
+            res.send('user expired, pleaze reconect');
         }
     }
     /*delete vin in cave*/
@@ -117,7 +117,7 @@ module.exports = app => {
                 });
             }
         }else{
-            res.send('user expired, pleaze reconect')
+            res.send('user expired, pleaze reconect');
         }
     }
     /*return list of vin by point*/
@@ -132,7 +132,7 @@ module.exports = app => {
                 });
             }
         }else{
-            res.send('user expired, pleaze reconect')
+            res.send('user expired, pleaze reconect');
         }
     }
     /* return complete list of vin*/
@@ -147,7 +147,7 @@ module.exports = app => {
                 });
             }
         }else{
-            res.send('user expired, pleaze reconect')
+            res.send('user expired, pleaze reconect');
         }
     }
 };

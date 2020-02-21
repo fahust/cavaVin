@@ -50,7 +50,7 @@ module.exports = app => {
     function deleteUser(req, res, id){
         app.models.User.findOneAndDelete({ _id: id }, function(err, user) {
             if (err) throw err;
-            res.json('L\'utilisateur a bien été supprimé');
+            res.json('User has been deleted');
         });
     }
 };
