@@ -61,9 +61,10 @@ cd cavaVin
 //@see https://rogerdudler.github.io/git-guide/index.fr.html
 //git init //créer un nouveau dépot
 //git remote add origin https://github.com/fahust/cavaVin.git
-git checkout -b maNewBranch //créer et switch (-b créer)
+git pull origin master //télécharge la version la plus actuelle en ligne
+git checkout -b maNewBranch //créer et switch (-b créer) (ne jamais mêttre deux fois un même nom de branch)
 git add . //Ajouter/valider toutes les modifs de fichiers de la branche sur laquelle je bosse
-git commit -m "first commit" //Ajouter un comm' sur la branche actuelle (obligatoire)
-git push -u origin master //Envoyer les modifs sur le github
+git commit -m "mon commentaire" //Ajouter un commentaire sur la branche actuelle (obligatoire)
+git push -u origin maNewBranch //Envoyer les modifs sur le github
 git checkout master //Revenir sur la branche principale
 git pull origin master //Retélécharge la version la plus actuelle
