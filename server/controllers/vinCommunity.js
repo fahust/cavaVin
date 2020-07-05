@@ -1,3 +1,6 @@
+var jwt = require('jsonwebtoken');
+var timeExpiration = 60000*60;
+
 module.exports = app => {
     return {
         addVinCommunity,
@@ -109,18 +112,53 @@ module.exports = app => {
         });
     }
     /*return list of vin by point*/
-    function searchVinCommunity(req, res) { //test
-        app.models.VinCommunity.find({
-            $or: [{
-                name: new RegExp('^' + req.body.vin.key + '$', "i")
-            }, {
-                tags: new RegExp('^' + req.body.vin.key + '$', "i")
-            }]
-        }, function (err, vins) {
-            if (err)
-                res.send(err);
-            return res.json(vins);
-        });
+    function searchVinCommunity(req, res) {//name: new RegExp('^' + req.body.vin.key + '$', "i")
+        if(req.body.vin.owner){
+            var limit = 5
+            var page = req.body.vin.page-1
+            ownerVerified = jwt.verify(req.body.vin.owner, 'shhhhhh');
+            if(Date.now()-timeExpiration < ownerVerified.iat){
+                if(req.body.vin.owner){
+                    app.models.Vin.find({$or:[ {name: new RegExp('('+req.body.vin.key+')+', "i")} , {tags: new RegExp('('+req.body.vin.key+')+', "i")} ]})
+                    .sort({ update_at: -1 })
+                    .skip(page * limit) //Notice here
+                    .limit(limit)
+                    .exec((err, vins) => {
+                    if (err) {
+                        return res.json(err);
+                    }
+                    app.models.Vin.countDocuments({$or:[ {name: new RegExp('('+req.body.vin.key+')+', "i")} , {tags: new RegExp('('+req.body.vin.key+')+', "i")} ]})
+                    .exec((count_error, count) => {
+                        if (err) {
+                        return res.json(count_error);
+                        }
+                        return res.json({
+                        total: count,
+                        page: page,
+                        pageSize: vins.length,
+                        vins: vins
+                        });
+                    });
+                    });
+                }
+            }else{
+                res.send('user expired, pleaze reconect');
+            }
+        }
+        /*if(req.body.vin.owner){
+            ownerVerified = jwt.verify(req.body.vin.owner, 'shhhhhh');
+            if(Date.now()-timeExpiration < ownerVerified.iat){
+                if(req.body.vin.owner){
+                    app.models.Vin.find({$or:[ {name: new RegExp('('+req.body.vin.key+')+', "i")} , {tags: new RegExp('('+req.body.vin.key+')+', "i")} ]}, function(err, vins) {
+                        if (err) 
+                            res.send(err); 
+                        return res.json(vins);
+                    });
+                }
+            }else{
+                res.send('user expired, pleaze reconect');
+            }
+        }*/
     }
     /* return complete list of vin*/
     function listVinsCommunity(req, res) {
